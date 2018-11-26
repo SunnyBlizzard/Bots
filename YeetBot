@@ -1,0 +1,53 @@
+import discord
+import random
+
+from discord import Game
+from discord.ext.commands import Bot 
+
+token=('XXXXXXXXXXXXXX')
+BOT_PREFIX = ('.')
+client = Bot (command_prefix=BOT_PREFIX)
+
+@client.event
+async def on_ready():
+	print('yeet on em')
+	
+@client.event
+async def on_message(message):
+	if message.author == client.user:
+		return
+		
+	elif message.content.startswith('.help'):
+		embed = discord.Embed(title="**Help Page**", description="read about each command below :thinking:", color=0x42f1f4)
+		embed.add_field(name=":musical_note:  *.play* :musical_note: ", value="Type .play to play a song", inline=False)
+		embed.add_field(name=":fire: *.lol* :fire:", value="Type .lol for a surprise", inline=False)
+		await client.delete_message(message)
+		await client.send_message(message.channel, embed=embed)
+		
+	elif message.content.startswith('yeet'):
+		embed = discord.Embed(title="YEET", description=" ", color=0xff56d7)
+		embed.set_image(url='https://media.giphy.com/media/O5BvwlZzMNasU/giphy.gif')
+		await client.send_message(message.channel, embed=embed)
+		
+	elif message.content.startswith('.lol'):
+		possible_responses = [
+			'Feetus Deletus </3',
+			'How do you pick up Jewish girls? Go to Auschwitz with a dust pan.',
+			'Claaaaaasic Vinny',
+			'This aint it cheif',
+			'Hippity Hoppity Women are Property',
+			'Shut up ya boosted monkey',
+			'Metacognition Mission of Mindful Meandering and Meticulous Makeovers of Mind',
+			'The R in black stands for Rights',
+			'What is the hardest part of a vegetable to eat? The wheelchair.',
+			'Why do black people have nightmares? The last one to have a dream was shot.',
+			'What do you call a fake noodle? An Impasta.',
+			'5/4 of people admit that they’re bad with fractions.',
+			'According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway',
+			'Bleage of Blegoland',
+			
+		]
+		await client.send_message(message.channel, random.choice(possible_responses))
+
+
+client.run('token')
